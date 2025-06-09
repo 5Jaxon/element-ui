@@ -1,0 +1,99 @@
+:root {
+    --jx-color-white: #ffffff;
+    --jx-color-black: #000000;
+    --jx-color-primary: #409eff;
+    --jx-color-primary-light-3: #79bbff;
+    --jx-color-primary-light-5: #a0cfff;
+    --jx-color-primary-light-7: #c6e2ff;
+    --jx-color-primary-light-8: #d9ecff;
+    --jx-color-primary-light-9: #ecf5ff;
+    --jx-color-primary-dark-2: #337ecc;
+    --jx-color-success: #67c23a;
+    --jx-color-success-light-3: #95d475;
+    --jx-color-success-light-5: #b3e19d;
+    --jx-color-success-light-7: #d1edc4;
+    --jx-color-success-light-8: #e1f3d8;
+    --jx-color-success-light-9: #f0f9eb;
+    --jx-color-success-dark-2: #529b2e;
+    --jx-color-warning: #e6a23c;
+    --jx-color-warning-light-3: #eebe77;
+    --jx-color-warning-light-5: #f3d19e;
+    --jx-color-warning-light-7: #f8e3c5;
+    --jx-color-warning-light-8: #faecd8;
+    --jx-color-warning-light-9: #fdf6ec;
+    --jx-color-warning-dark-2: #b88230;
+    --jx-color-danger: #f56c6c;
+    --jx-color-danger-light-3: #f89898;
+    --jx-color-danger-light-5: #fab6b6;
+    --jx-color-danger-light-7: #fcd3d3;
+    --jx-color-danger-light-8: #fde2e2;
+    --jx-color-danger-light-9: #fef0f0;
+    --jx-color-danger-dark-2: #c45656;
+    --jx-color-error: #f56c6c;
+    --jx-color-error-light-3: #f89898;
+    --jx-color-error-light-5: #fab6b6;
+    --jx-color-error-light-7: #fcd3d3;
+    --jx-color-error-light-8: #fde2e2;
+    --jx-color-error-light-9: #fef0f0;
+    --jx-color-error-dark-2: #c45656;
+    --jx-color-info: #909399;
+    --jx-color-info-light-3: #b1b3b8;
+    --jx-color-info-light-5: #c8c9cc;
+    --jx-color-info-light-7: #dedfe0;
+    --jx-color-info-light-8: #e9e9eb;
+    --jx-color-info-light-9: #f4f4f5;
+    --jx-color-info-dark-2: #73767a;
+
+
+
+    --jx-bg-color: #ffffff;
+    --jx-bg-color-page: #f2f3f5;
+    --jx-bg-color-overlay: #ffffff;
+    --jx-text-color-primary: #303133;
+    --jx-text-color-regular: #606266;
+    --jx-text-color-secondary: #909399;
+    --jx-text-color-placeholder: #a8abb2;
+    --jx-text-color-disabled: #c0c4cc;
+    --jx-border-color: #dcdfe6;
+    --jx-border-color-light: #e4e7ed;
+    --jx-border-color-lighter: #ebeef5;
+    --jx-border-color-extra-light: #f2f6fc;
+    --jx-border-color-dark: #d4d7de;
+    --jx-border-color-darker: #cdd0d6;
+    --jx-fill-color: #f0f2f5;
+    --jx-fill-color-light: #f5f7fa;
+    --jx-fill-color-lighter: #fafafa;
+    --jx-fill-color-extra-light: #fafcff;
+    --jx-fill-color-dark: #ebedf0;
+    --jx-fill-color-darker: #e6e8eb;
+    --jx-fill-color-blank: #ffffff;
+
+    /* border */
+    --jx-border-width: 1px;
+    --jx-border-style: solid;
+    --jx-border-color-hover: var(--jx-text-color-disabled);
+    --jx-border: var(--jx-border-width) var(--jx-border-style) var(--jx-border-color);
+    --jx-border-radius-base: 4px;
+    --jx-border-radius-small: 2px;
+    --jx-border-radius-round: 20px;
+    --jx-border-radius-circle: 100%;
+
+    /*font*/
+    --jx-font-size-extra-large: 20px;
+    --jx-font-size-large: 18px;
+    --jx-font-size-medium: 16px;
+    --jx-font-size-base: 14px;
+    --jx-font-size-small: 13px;
+    --jx-font-size-extra-small: 12px;
+    --jx-font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "\5fae\8f6f\96c5\9ed1", Arial, sans-serif;
+    --jx-font-weight-primary: 500;
+
+    /*disabled*/
+    --jx-disabled-bg-color: var(--jx-fill-color-light);
+    --jx-disabled-text-color: var(--jx-text-color-placeholder);
+    --jx-disabled-border-color: var(--jx-border-color-light);
+    
+    /*animation*/
+    --jx-transition-duration: .3s;
+    --jx-transition-duration-fast: .2s;
+}
