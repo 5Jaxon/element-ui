@@ -11,6 +11,12 @@
         </button>
 </template>
 
+<script lang="ts">
+export default {
+    name:'JxButton'
+}
+</script>
+
 <script lang="ts" setup>
 import {type ButtonProps} from './types';
 import {defineProps} from 'vue';
@@ -19,6 +25,6 @@ withDefaults(defineProps<ButtonProps>(),{nativeType:'button'})
 
 </script>
 
-<style lang="less" scoped>
-
+<style scoped>
+@import './style.css'
 </style>

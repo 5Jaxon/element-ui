@@ -1,5 +1,5 @@
 <template>
-    <Button :circle="true">test</Button>
+    <Button :circle="true" disabled>test</Button>
     <a href="www.baidu.com">link</a>
 </template>
 
