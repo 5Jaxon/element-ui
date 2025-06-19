@@ -1,5 +1,5 @@
 <template>
-    <button class="jx-button" :class="{
+    <button ref="_ref" class="jx-button" :class="{
             [`jx-button--${size}`]:size,
             [`jx-button--${type}`]:type,
             'is-plain':plain,
@@ -19,10 +19,11 @@ export default {
 
 <script lang="ts" setup>
 import {type ButtonProps} from './types';
-import {defineProps} from 'vue';
+import {defineProps,ref,defineExpose} from 'vue';
 
+let _ref=ref<HTMLButtonElement>();
 withDefaults(defineProps<ButtonProps>(),{nativeType:'button'})
-
+defineExpose({ref:_ref});
 </script>
 
 <style scoped>

@@ -1,11 +1,21 @@
 <template>
-    <Button :circle="true" disabled>test</Button>
-    <a href="www.baidu.com">link</a>
+    <Button circle type="info">circle</Button>
+    <Button disabled type="danger">disabled</BUtton>
+    <Button plain type="primary">plain</Button>
+    <Button round type="success" size="small">round</Button>
+    <Button autofocus type="warning" size="large">autofocus</Button>
+    <Button native-type="button" ref="btn" @click="output">output</Button>
+    
 </template>
 
 <script lang="ts" setup>
 import Button from './components/Button/Button.vue';
-
+import { ref } from 'vue';
+let btn = ref();
+function output() {
+  console.log(btn);
+  
+}
 </script>
 
 <script lang="ts">
