@@ -5,11 +5,16 @@
     <Button round type="success" size="small">round</Button>
     <Button autofocus type="warning" size="large">autofocus</Button>
     <Button native-type="button" ref="btn" @click="output">output</Button>
-    
+    <Collapse>
+      <CollapseItem name="a" title="a">content a</CollapseItem>
+      <CollapseItem name="b" title="b" disabled>content b</CollapseItem>
+    </Collapse>
 </template>
 
 <script lang="ts" setup>
 import Button from './components/Button/Button.vue';
+import Collapse from './components/Collapse/Collapse.vue';
+import CollapseItem from './components/Collapse/CollapseItem.vue';
 import { ref } from 'vue';
 let btn = ref();
 function output() {
