@@ -5,10 +5,12 @@
     <Button round type="success" size="small">round</Button>
     <Button autofocus type="warning" size="large">autofocus</Button>
     <Button native-type="button" ref="btn" @click="output">output</Button>
-    <Collapse>
+    <Collapse v-model="openList" accordion>
       <CollapseItem name="a" title="a">content a</CollapseItem>
+      <CollapseItem name="c" title="c">content c</CollapseItem>
       <CollapseItem name="b" title="b" disabled>content b</CollapseItem>
     </Collapse>
+    <div>{{ openList }}</div>
 </template>
 
 <script lang="ts" setup>
@@ -17,10 +19,12 @@ import Collapse from './components/Collapse/Collapse.vue';
 import CollapseItem from './components/Collapse/CollapseItem.vue';
 import { ref } from 'vue';
 let btn = ref();
+let openList = ref(['a']);
 function output() {
   console.log(btn);
   
 }
+
 </script>
 
 <script lang="ts">

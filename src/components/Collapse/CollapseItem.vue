@@ -4,7 +4,7 @@
     'is-disabled': disabled
   }">
     <div class="jx-collapse-item__header" :id="`item-header-${name}`" @click="handleClick">
-      <solt name="title">{{ title }}</solt>      
+      <slot name="title">{{ title }}</slot>      
     </div>
     <div class="jx-collapse-item__content" :id="`item-content-${name}`" v-show="isActive">
       <slot />
