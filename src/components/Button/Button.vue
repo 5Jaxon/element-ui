@@ -25,7 +25,3 @@ let _ref=ref<HTMLButtonElement>();
 withDefaults(defineProps<ButtonProps>(),{nativeType:'button'})
 defineExpose({ref:_ref});
 </script>
-
-<style scoped>
-@import './style.css'
-</style>
