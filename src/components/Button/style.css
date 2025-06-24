@@ -1,230 +1,248 @@
 .jx-button {
-    --jx-button-font-weight: var(--jx-font-weight-primary);
-    --jx-button-border-color: var(--jx-border-color);
-    --jx-button-bg-color: var(--jx-fill-color-blank);
-    --jx-button-text-color: var(--jx-text-color-regular);
-    --jx-button-disabled-text-color: var(--jx-disabled-text-color);
-    --jx-button-disabled-bg-color: var(--jx-fill-color-blank);
-    --jx-button-disabled-border-color: var(--jx-border-color-light);
-    --jx-button-hover-text-color: var(--jx-color-primary);
-    --jx-button-hover-bg-color: var(--jx-color-primary-light-9);
-    --jx-button-hover-border-color: var(--jx-color-primary-light-7);
-    --jx-button-active-text-color: var(--jx-button-hover-text-color);
-    --jx-button-active-border-color: var(--jx-color-primary);
-    --jx-button-active-bg-color: var(--jx-button-hover-bg-color);
-    --jx-button-outline-color: var(--jx-color-primary-light-5);
-    --jx-button-active-color: var(--jx-text-color-primary);
+  --jx-button-font-weight: var(--jx-font-weight-primary);
+  --jx-button-border-color: var(--jx-border-color);
+  --jx-button-bg-color: var(--jx-fill-color-blank);
+  --jx-button-text-color: var(--jx-text-color-regular);
+  --jx-button-disabled-text-color: var(--jx-disabled-text-color);
+  --jx-button-disabled-bg-color: var(--jx-fill-color-blank);
+  --jx-button-disabled-border-color: var(--jx-border-color-light);
+  --jx-button-hover-text-color: var(--jx-color-primary);
+  --jx-button-hover-bg-color: var(--jx-color-primary-light-9);
+  --jx-button-hover-border-color: var(--jx-color-primary-light-7);
+  --jx-button-active-text-color: var(--jx-button-hover-text-color);
+  --jx-button-active-border-color: var(--jx-color-primary);
+  --jx-button-active-bg-color: var(--jx-button-hover-bg-color);
+  --jx-button-outline-color: var(--jx-color-primary-light-5);
+  --jx-button-active-color: var(--jx-text-color-primary);
+}
+
+.jx-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1;
+  height: 32px;
+  white-space: nowrap;
+  cursor: pointer;
+  color: var(--jx-button-text-color);
+  text-align: center;
+  box-sizing: border-box;
+  outline: none;
+  transition: .1s;
+  font-weight: var(--jx-button-font-weight);
+  user-select: none;
+  vertical-align: middle;
+  -webkit-appearance: none;
+  background-color: var(--jx-button-bg-color);
+  border: var(--jx-border);
+  border-color: var(--jx-button-border-color);
+  padding: 8px 15px;
+  font-size: var(--jx-font-size-base);
+  border-radius: var(--jx-border-radius-base);
+
+  &+& {
+    margin-left: 12px;
   }
-  .jx-button {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    line-height: 1;
-    height: 32px;
-    white-space: nowrap;
-    cursor: pointer;
-    color: var(--jx-button-text-color);
-    text-align: center;
-    box-sizing: border-box;
+
+  &:hover,
+  &:focus {
+    color: var(--jx-button-hover-text-color);
+    border-color: var(--jx-button-hover-border-color);
+    background-color: var(--jx-button-hover-bg-color);
     outline: none;
-    transition: .1s;
-    font-weight: var(--jx-button-font-weight);
-    user-select: none;
-    vertical-align: middle;
-    -webkit-appearance: none;
-    background-color: var(--jx-button-bg-color);
-    border: var(--jx-border);
-    border-color: var(--jx-button-border-color);
-    padding: 8px 15px;
-    font-size: var(--jx-font-size-base);
-    border-radius: var(--jx-border-radius-base);
-    & + & {
-      margin-left: 12px;
-    }
-    &:hover,
-    &:focus {
-      color: var(--jx-button-hover-text-color);
-      border-color: var(--jx-button-hover-border-color);
-      background-color: var(--jx-button-hover-bg-color);
-      outline: none;    
-    }
-    &:active {
-      color: var(--jx-button-active-text-color);
-      border-color: var(--jx-button-active-border-color);
-      background-color: var(--jx-button-active-bg-color);
-      outline: none;
-    }
-    &.is-plain {
-      --jx-button-hover-text-color: var(--jx-color-primary);
-      --jx-button-hover-bg-color: var(--jx-fill-color-blank);
-      --jx-button-hover-border-color: var(--jx-color-primary);    
-    }
-    /*round*/
-    &.is-round {
-      border-radius: var(--jx-border-radius-round);
-    }
-    /*circle*/
-    &.is-circle {
-      border-radius: 50%;
-      padding: 8px;
-    }
-    /*disabled*/
-    &.is-disabled, &.is-disabled:hover, &.is-disabled:focus, 
-    &[disabled], &[disabled]:hover, &[disabled]:focus 
-    {
-      color: var(--jx-button-disabled-text-color);
-      cursor: not-allowed;
-      background-image: none;
-      background-color: var(--jx-button-disabled-bg-color);
-      border-color: var(--jx-button-disabled-border-color);
-    }
-    [class*=dh-icon] + span {
-      margin-left: 6px;
-    }
   }
-  /* @each $val in primary,success,warning,info,danger { */
-    .jx-button--primary {
-      --jx-button-text-color: var(--jx-color-white);
-      --jx-button-bg-color: var(--jx-color-primary);
-      --jx-button-border-color: var(--jx-color-primary);
-      --jx-button-outline-color: var(--jx-color-primary-light-5);
-      --jx-button-active-color: var(--jx-color-primary-dark-2);
-      --jx-button-hover-text-color: var(--jx-color-white);
-      --jx-button-hover-bg-color: var(--jx-color-primary-light-3);
-      --jx-button-hover-border-color: var(--jx-color-primary-light-3);
-      --jx-button-active-bg-color: var(--jx-color-primary-dark-2);
-      --jx-button-active-border-color: var(--jx-color-primary-dark-2);
-      --jx-button-disabled-text-color: var(--jx-color-white);
-      --jx-button-disabled-bg-color: var(--jx-color-primary-light-5);
-      --jx-button-disabled-border-color: var(--jx-color-primary-light-5);
-    }
-    .jx-button--primary.is-plain {
-      --jx-button-text-color: var(--jx-color-primary);
-      --jx-button-bg-color: var(--jx-color-primary-light-9);
-      --jx-button-border-color: var(--jx-color-primary-light-5);
-      --jx-button-hover-text-color: var(--jx-color-white);
-      --jx-button-hover-bg-color: var(--jx-color-primary);
-      --jx-button-hover-border-color: var(--jx-color-primary);
-      --jx-button-active-text-color: var(--jx-color-white);
-    }
 
-
-    .jx-button--success {
-        --jx-button-text-color: var(--jx-color-white);
-        --jx-button-bg-color: var(--jx-color-success);
-        --jx-button-border-color: var(--jx-color-success);
-        --jx-button-outline-color: var(--jx-color-success-light-5);
-        --jx-button-active-color: var(--jx-color-success-dark-2);
-        --jx-button-hover-text-color: var(--jx-color-white);
-        --jx-button-hover-bg-color: var(--jx-color-success-light-3);
-        --jx-button-hover-border-color: var(--jx-color-success-light-3);
-        --jx-button-active-bg-color: var(--jx-color-success-dark-2);
-        --jx-button-active-border-color: var(--jx-color-success-dark-2);
-        --jx-button-disabled-text-color: var(--jx-color-white);
-        --jx-button-disabled-bg-color: var(--jx-color-success-light-5);
-        --jx-button-disabled-border-color: var(--jx-color-success-light-5);
-      }
-      .jx-button--success.is-plain {
-        --jx-button-text-color: var(--jx-color-success);
-        --jx-button-bg-color: var(--jx-color-success-light-9);
-        --jx-button-border-color: var(--jx-color-success-light-5);
-        --jx-button-hover-text-color: var(--jx-color-white);
-        --jx-button-hover-bg-color: var(--jx-color-success);
-        --jx-button-hover-border-color: var(--jx-color-success);
-        --jx-button-active-text-color: var(--jx-color-white);
-      }
-
-      .jx-button--warning {
-        --jx-button-text-color: var(--jx-color-white);
-        --jx-button-bg-color: var(--jx-color-warning);
-        --jx-button-border-color: var(--jx-color-warning);
-        --jx-button-outline-color: var(--jx-color-warning-light-5);
-        --jx-button-active-color: var(--jx-color-warning-dark-2);
-        --jx-button-hover-text-color: var(--jx-color-white);
-        --jx-button-hover-bg-color: var(--jx-color-warning-light-3);
-        --jx-button-hover-border-color: var(--jx-color-warning-light-3);
-        --jx-button-active-bg-color: var(--jx-color-warning-dark-2);
-        --jx-button-active-border-color: var(--jx-color-warning-dark-2);
-        --jx-button-disabled-text-color: var(--jx-color-white);
-        --jx-button-disabled-bg-color: var(--jx-color-warning-light-5);
-        --jx-button-disabled-border-color: var(--jx-color-warning-light-5);
-      }
-      .jx-button--warning.is-plain {
-        --jx-button-text-color: var(--jx-color-warning);
-        --jx-button-bg-color: var(--jx-color-warning-light-9);
-        --jx-button-border-color: var(--jx-color-warning-light-5);
-        --jx-button-hover-text-color: var(--jx-color-white);
-        --jx-button-hover-bg-color: var(--jx-color-warning);
-        --jx-button-hover-border-color: var(--jx-color-warning);
-        --jx-button-active-text-color: var(--jx-color-white);
-      }
-
-
-      .jx-button--info {
-        --jx-button-text-color: var(--jx-color-white);
-        --jx-button-bg-color: var(--jx-color-info);
-        --jx-button-border-color: var(--jx-color-info);
-        --jx-button-outline-color: var(--jx-color-info-light-5);
-        --jx-button-active-color: var(--jx-color-info-dark-2);
-        --jx-button-hover-text-color: var(--jx-color-white);
-        --jx-button-hover-bg-color: var(--jx-color-info-light-3);
-        --jx-button-hover-border-color: var(--jx-color-info-light-3);
-        --jx-button-active-bg-color: var(--jx-color-info-dark-2);
-        --jx-button-active-border-color: var(--jx-color-info-dark-2);
-        --jx-button-disabled-text-color: var(--jx-color-white);
-        --jx-button-disabled-bg-color: var(--jx-color-info-light-5);
-        --jx-button-disabled-border-color: var(--jx-color-info-light-5);
-      }
-      .jx-button--info.is-plain {
-        --jx-button-text-color: var(--jx-color-info);
-        --jx-button-bg-color: var(--jx-color-info-light-9);
-        --jx-button-border-color: var(--jx-color-info-light-5);
-        --jx-button-hover-text-color: var(--jx-color-white);
-        --jx-button-hover-bg-color: var(--jx-color-info);
-        --jx-button-hover-border-color: var(--jx-color-info);
-        --jx-button-active-text-color: var(--jx-color-white);
-      }
-
-
-
-      .jx-button--danger {
-        --jx-button-text-color: var(--jx-color-white);
-        --jx-button-bg-color: var(--jx-color-danger);
-        --jx-button-border-color: var(--jx-color-danger);
-        --jx-button-outline-color: var(--jx-color-danger-light-5);
-        --jx-button-active-color: var(--jx-color-danger-dark-2);
-        --jx-button-hover-text-color: var(--jx-color-white);
-        --jx-button-hover-bg-color: var(--jx-color-danger-light-3);
-        --jx-button-hover-border-color: var(--jx-color-danger-light-3);
-        --jx-button-active-bg-color: var(--jx-color-danger-dark-2);
-        --jx-button-active-border-color: var(--jx-color-danger-dark-2);
-        --jx-button-disabled-text-color: var(--jx-color-white);
-        --jx-button-disabled-bg-color: var(--jx-color-danger-light-5);
-        --jx-button-disabled-border-color: var(--jx-color-danger-light-5);
-      }
-      .jx-button--danger.is-plain {
-        --jx-button-text-color: var(--jx-color-danger);
-        --jx-button-bg-color: var(--jx-color-danger-light-9);
-        --jx-button-border-color: var(--jx-color-danger-light-5);
-        --jx-button-hover-text-color: var(--jx-color-white);
-        --jx-button-hover-bg-color: var(--jx-color-danger);
-        --jx-button-hover-border-color: var(--jx-color-danger);
-        --jx-button-active-text-color: var(--jx-color-white);
-      }
-  /* } */
-  .jx-button--large {
-    --jx-button-size: 40px;
-    height: var(--jx-button-size);
-    padding: 12px 19px;
-    font-size: var(--jx-font-size-base);
-    border-radius: var(--jx-border-radius-base);
+  &:active {
+    color: var(--jx-button-active-text-color);
+    border-color: var(--jx-button-active-border-color);
+    background-color: var(--jx-button-active-bg-color);
+    outline: none;
   }
-  .jx-button--small {
-    --jx-button-size: 24px;
-    height: var(--jx-button-size);
-    padding: 5px 11px;
-    font-size: 12px;
-    border-radius: calc(var(--jx-border-radius-base) - 1px);
+
+  &.is-plain {
+    --jx-button-hover-text-color: var(--jx-color-primary);
+    --jx-button-hover-bg-color: var(--jx-fill-color-blank);
+    --jx-button-hover-border-color: var(--jx-color-primary);
   }
-  
-  
+
+  /*round*/
+  &.is-round {
+    border-radius: var(--jx-border-radius-round);
+  }
+
+  /*circle*/
+  &.is-circle {
+    border-radius: 50%;
+    padding: 8px;
+  }
+
+  /*disabled*/
+  &.is-disabled,
+  &.is-disabled:hover,
+  &.is-disabled:focus,
+  &[disabled],
+  &[disabled]:hover,
+  &[disabled]:focus {
+    color: var(--jx-button-disabled-text-color);
+    cursor: not-allowed;
+    background-image: none;
+    background-color: var(--jx-button-disabled-bg-color);
+    border-color: var(--jx-button-disabled-border-color);
+  }
+
+  [class*=jx-icon]+span {
+    margin-left: 6px;
+  }
+}
+
+/* @each $val in primary,success,warning,info,danger { */
+.jx-button--primary {
+  --jx-button-text-color: var(--jx-color-white);
+  --jx-button-bg-color: var(--jx-color-primary);
+  --jx-button-border-color: var(--jx-color-primary);
+  --jx-button-outline-color: var(--jx-color-primary-light-5);
+  --jx-button-active-color: var(--jx-color-primary-dark-2);
+  --jx-button-hover-text-color: var(--jx-color-white);
+  --jx-button-hover-bg-color: var(--jx-color-primary-light-3);
+  --jx-button-hover-border-color: var(--jx-color-primary-light-3);
+  --jx-button-active-bg-color: var(--jx-color-primary-dark-2);
+  --jx-button-active-border-color: var(--jx-color-primary-dark-2);
+  --jx-button-disabled-text-color: var(--jx-color-white);
+  --jx-button-disabled-bg-color: var(--jx-color-primary-light-5);
+  --jx-button-disabled-border-color: var(--jx-color-primary-light-5);
+}
+
+.jx-button--primary.is-plain {
+  --jx-button-text-color: var(--jx-color-primary);
+  --jx-button-bg-color: var(--jx-color-primary-light-9);
+  --jx-button-border-color: var(--jx-color-primary-light-5);
+  --jx-button-hover-text-color: var(--jx-color-white);
+  --jx-button-hover-bg-color: var(--jx-color-primary);
+  --jx-button-hover-border-color: var(--jx-color-primary);
+  --jx-button-active-text-color: var(--jx-color-white);
+}
+
+
+.jx-button--success {
+  --jx-button-text-color: var(--jx-color-white);
+  --jx-button-bg-color: var(--jx-color-success);
+  --jx-button-border-color: var(--jx-color-success);
+  --jx-button-outline-color: var(--jx-color-success-light-5);
+  --jx-button-active-color: var(--jx-color-success-dark-2);
+  --jx-button-hover-text-color: var(--jx-color-white);
+  --jx-button-hover-bg-color: var(--jx-color-success-light-3);
+  --jx-button-hover-border-color: var(--jx-color-success-light-3);
+  --jx-button-active-bg-color: var(--jx-color-success-dark-2);
+  --jx-button-active-border-color: var(--jx-color-success-dark-2);
+  --jx-button-disabled-text-color: var(--jx-color-white);
+  --jx-button-disabled-bg-color: var(--jx-color-success-light-5);
+  --jx-button-disabled-border-color: var(--jx-color-success-light-5);
+}
+
+.jx-button--success.is-plain {
+  --jx-button-text-color: var(--jx-color-success);
+  --jx-button-bg-color: var(--jx-color-success-light-9);
+  --jx-button-border-color: var(--jx-color-success-light-5);
+  --jx-button-hover-text-color: var(--jx-color-white);
+  --jx-button-hover-bg-color: var(--jx-color-success);
+  --jx-button-hover-border-color: var(--jx-color-success);
+  --jx-button-active-text-color: var(--jx-color-white);
+}
+
+.jx-button--warning {
+  --jx-button-text-color: var(--jx-color-white);
+  --jx-button-bg-color: var(--jx-color-warning);
+  --jx-button-border-color: var(--jx-color-warning);
+  --jx-button-outline-color: var(--jx-color-warning-light-5);
+  --jx-button-active-color: var(--jx-color-warning-dark-2);
+  --jx-button-hover-text-color: var(--jx-color-white);
+  --jx-button-hover-bg-color: var(--jx-color-warning-light-3);
+  --jx-button-hover-border-color: var(--jx-color-warning-light-3);
+  --jx-button-active-bg-color: var(--jx-color-warning-dark-2);
+  --jx-button-active-border-color: var(--jx-color-warning-dark-2);
+  --jx-button-disabled-text-color: var(--jx-color-white);
+  --jx-button-disabled-bg-color: var(--jx-color-warning-light-5);
+  --jx-button-disabled-border-color: var(--jx-color-warning-light-5);
+}
+
+.jx-button--warning.is-plain {
+  --jx-button-text-color: var(--jx-color-warning);
+  --jx-button-bg-color: var(--jx-color-warning-light-9);
+  --jx-button-border-color: var(--jx-color-warning-light-5);
+  --jx-button-hover-text-color: var(--jx-color-white);
+  --jx-button-hover-bg-color: var(--jx-color-warning);
+  --jx-button-hover-border-color: var(--jx-color-warning);
+  --jx-button-active-text-color: var(--jx-color-white);
+}
+
+
+.jx-button--info {
+  --jx-button-text-color: var(--jx-color-white);
+  --jx-button-bg-color: var(--jx-color-info);
+  --jx-button-border-color: var(--jx-color-info);
+  --jx-button-outline-color: var(--jx-color-info-light-5);
+  --jx-button-active-color: var(--jx-color-info-dark-2);
+  --jx-button-hover-text-color: var(--jx-color-white);
+  --jx-button-hover-bg-color: var(--jx-color-info-light-3);
+  --jx-button-hover-border-color: var(--jx-color-info-light-3);
+  --jx-button-active-bg-color: var(--jx-color-info-dark-2);
+  --jx-button-active-border-color: var(--jx-color-info-dark-2);
+  --jx-button-disabled-text-color: var(--jx-color-white);
+  --jx-button-disabled-bg-color: var(--jx-color-info-light-5);
+  --jx-button-disabled-border-color: var(--jx-color-info-light-5);
+}
+
+.jx-button--info.is-plain {
+  --jx-button-text-color: var(--jx-color-info);
+  --jx-button-bg-color: var(--jx-color-info-light-9);
+  --jx-button-border-color: var(--jx-color-info-light-5);
+  --jx-button-hover-text-color: var(--jx-color-white);
+  --jx-button-hover-bg-color: var(--jx-color-info);
+  --jx-button-hover-border-color: var(--jx-color-info);
+  --jx-button-active-text-color: var(--jx-color-white);
+}
+
+
+
+.jx-button--danger {
+  --jx-button-text-color: var(--jx-color-white);
+  --jx-button-bg-color: var(--jx-color-danger);
+  --jx-button-border-color: var(--jx-color-danger);
+  --jx-button-outline-color: var(--jx-color-danger-light-5);
+  --jx-button-active-color: var(--jx-color-danger-dark-2);
+  --jx-button-hover-text-color: var(--jx-color-white);
+  --jx-button-hover-bg-color: var(--jx-color-danger-light-3);
+  --jx-button-hover-border-color: var(--jx-color-danger-light-3);
+  --jx-button-active-bg-color: var(--jx-color-danger-dark-2);
+  --jx-button-active-border-color: var(--jx-color-danger-dark-2);
+  --jx-button-disabled-text-color: var(--jx-color-white);
+  --jx-button-disabled-bg-color: var(--jx-color-danger-light-5);
+  --jx-button-disabled-border-color: var(--jx-color-danger-light-5);
+}
+
+.jx-button--danger.is-plain {
+  --jx-button-text-color: var(--jx-color-danger);
+  --jx-button-bg-color: var(--jx-color-danger-light-9);
+  --jx-button-border-color: var(--jx-color-danger-light-5);
+  --jx-button-hover-text-color: var(--jx-color-white);
+  --jx-button-hover-bg-color: var(--jx-color-danger);
+  --jx-button-hover-border-color: var(--jx-color-danger);
+  --jx-button-active-text-color: var(--jx-color-white);
+}
+
+/* } */
+.jx-button--large {
+  --jx-button-size: 40px;
+  height: var(--jx-button-size);
+  padding: 12px 19px;
+  font-size: var(--jx-font-size-base);
+  border-radius: var(--jx-border-radius-base);
+}
+
+.jx-button--small {
+  --jx-button-size: 24px;
+  height: var(--jx-button-size);
+  padding: 5px 11px;
+  font-size: 12px;
+  border-radius: calc(var(--jx-border-radius-base) - 1px);
+}

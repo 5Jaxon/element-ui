@@ -5,8 +5,9 @@
             'is-plain':plain,
             'is-round':round,
             'is-circle':circle,
-            'is-disabled':disable,
+            'is-disabled':disable || loading,
         }" :disable="disable" :type="nativeType" :autofocus="autofocus">
+        <Icon icon="spinner" spin v-if="loading" />        
         <span><slot/></span>
         </button>
 </template>
@@ -18,6 +19,7 @@ export default {
 </script>
 
 <script lang="ts" setup>
+import Icon from '../Icon/Icon.vue';
 import {type ButtonProps} from './types';
 import {defineProps,ref,defineExpose} from 'vue';
 
