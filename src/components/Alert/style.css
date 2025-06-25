@@ -1,0 +1,100 @@
+.jx-alert {
+  --jx-alert-font-weight: var(--jx-font-weight-primary);
+  --jx-alert-text-color: var(--jx-color-info);
+  --jx-alert-bg-color: var(--jx-color-info-light-8);
+
+}
+
+.jx-alert {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  line-height: 1;
+  height: 32px;
+  white-space: nowrap;
+  cursor: text;
+  color: var(--jx-alert-text-color);
+  text-align: center;
+  box-sizing: border-box;
+  outline: none;
+  transition: .1s;
+  font-weight: var(--jx-alert-font-weight);
+  vertical-align: middle;
+  -webkit-appearance: none;
+  background-color: var(--jx-alert-bg-color);
+  padding: 8px 15px;
+  font-size: var(--jx-font-size-base);
+  border-radius: var(--jx-border-radius-base);
+
+  &+& {
+    margin-top: 12px;
+  }
+}
+
+
+.jx-alert--primary {
+  --jx-alert-text-color: var(--jx-color-primary);
+  --jx-alert-bg-color: var(--jx-color-primary-light-8);
+}
+
+.jx-alert--primary.jx-alert--dark {
+  --jx-alert-text-color: var(--jx-color-white);
+  --jx-alert-bg-color: var(--jx-color-primary);
+}
+
+
+.jx-alert--success {
+  --jx-alert-text-color: var(--jx-color-success);
+  --jx-alert-bg-color: var(--jx-color-success-light-8);
+}
+
+.jx-alert--success.jx-alert--dark {
+  --jx-alert-text-color: var(--jx-color-white);
+  --jx-alert-bg-color: var(--jx-color-success);
+}
+
+.jx-alert--warning {
+  --jx-alert-text-color: var(--jx-color-warning);
+  --jx-alert-bg-color: var(--jx-color-warning-light-8);
+}
+
+.jx-alert--warning.jx-alert--dark {
+  --jx-alert-text-color: var(--jx-color-white);
+  --jx-alert-bg-color: var(--jx-color-warning);
+}
+
+
+.jx-alert--info {
+  --jx-alert-text-color: var(--jx-color-info);
+  --jx-alert-bg-color: var(--jx-color-info-light-8);
+}
+
+.jx-alert--info.jx-alert--dark {
+  --jx-alert-text-color: var(--jx-color-white);
+  --jx-alert-bg-color: var(--jx-color-info);
+}
+
+.jx-alert--danger {
+  --jx-alert-text-color: var(--jx-color-danger);
+  --jx-alert-bg-color: var(--jx-color-danger-light-8);
+}
+
+.jx-alert--danger.jx-alert--dark {
+  --jx-alert-text-color: var(--jx-color-white);
+  --jx-alert-bg-color: var(--jx-color-danger);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter-to,
+.fade-leave-from {
+  opacity: 1;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
