@@ -86,7 +86,7 @@
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s;
+  transition: opacity var(--jx-transition-duration);
 }
 
 .fade-enter-to,

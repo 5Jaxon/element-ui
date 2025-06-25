@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { AlertEmit, Instance, type AlertProps } from './types';
+import { AlertEmit, Instance, AlertProps } from './types';
 import Icon from '../Icon/Icon.vue';
 
 defineOptions({
