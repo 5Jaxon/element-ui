@@ -3,7 +3,9 @@
     <Button circle type="info" @click="open2">circle</Button>
     <Button disabled type="danger">disabled</BUtton>
     <Button plain type="primary" @click="close2">plain</Button>
-    <Button round type="success" size="small">round</Button>
+    <Tooltip content="66" placement="bottom" trigger="hover" ref="tipRef" transition="fade" :openDelay="300" :closeDelay="300">
+      <Button round type="success" size="small">round</Button>
+    </Tooltip>
     <Button autofocus type="warning" size="large">
       <div>
         autofocus
