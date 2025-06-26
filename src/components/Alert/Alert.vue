@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { AlertEmit, Instance, AlertProps } from './types';
+import type { AlertEmits, Instance, AlertProps } from './types';
 import Icon from '../Icon/Icon.vue';
 
 defineOptions({
@@ -21,7 +21,7 @@ defineOptions({
 
 withDefaults(defineProps<AlertProps>(), { closable: true });
 
-const emit = defineEmits<AlertEmit>();
+const emit = defineEmits<AlertEmits>();
 const active = ref(true);
 
 const open = () => {

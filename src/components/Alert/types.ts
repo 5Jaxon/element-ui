@@ -5,7 +5,7 @@ export interface AlertProps {
   closable?: boolean
 }
 
-export interface AlertEmit {
+export interface AlertEmits {
   (e: 'close'): void;
   (e: 'open'): void;
 }
