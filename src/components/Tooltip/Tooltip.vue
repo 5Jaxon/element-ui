@@ -60,8 +60,7 @@ const open = () => {
 
 const openDelay = () => {
   active.value = true;
-  emit('visable-change', active.value);
-  // console.log('open');  
+  emit('visable-change', active.value);  
 }
 
 let closeTimeout:number | null = null;
@@ -80,8 +79,7 @@ const close = () => {
 
 const closeDelay = () => {
   active.value = false;
-  emit('visable-change', active.value);
-  // console.log('close');  
+  emit('visable-change', active.value);  
 }
 
 const attachevents = () => {
@@ -89,7 +87,7 @@ const attachevents = () => {
   outEvents.value = {};
   if (props.trigger === 'click') {
     events.value['click'] = () => {
-      if (active) close();
+      if (active.value) close();
       else open();
     }
   } else if (props.trigger === 'hover') {
@@ -110,8 +108,11 @@ watch(() => props.manual, (manual) => {
 if (!props.manual) attachevents();
 
 useClickOutside(containerNode, () => {
-  if (props.trigger === 'click' && active.value && !props.manual)
+  if (props.trigger === 'click' && active.value && !props.manual) {
     close();
+    
+  }
+    
 });
 
 watch(() => props.trigger, attachevents);

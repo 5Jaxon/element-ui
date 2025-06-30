@@ -19,10 +19,10 @@
       <CollapseItem name="b" title="b" disabled>content b</CollapseItem>
     </Collapse>
     <div>{{ openList }}</div>
-    <Tooltip placement="bottom" trigger="hover" ref="tipRef" transition="fade" :openDelay="300" :closeDelay="300">
+    <!-- <Tooltip placement="bottom" trigger="hover" ref="tipRef" transition="fade" :openDelay="300" :closeDelay="300">
       <Alert>666</Alert>
       <template #content><img src="https://n.sinaimg.cn/sinacn20107/685/w594h891/20190427/2453-hvvuiyp2168424.jpg"/></template>
-    </Tooltip>
+    </Tooltip> -->
     
     <Alert type="success" effect="light" :closable="false">666</Alert>
     <!-- <Alert type="success" effect="dark" >666</Alert>
@@ -34,6 +34,9 @@
     <Alert type="primary" effect="dark" >666</Alert> -->
     <Alert type="info" effect="light" :closable="false">666</Alert>
     <Alert ref="alert" type="info" effect="dark" @close="console.log('close')" @open="console.log('open')">666</Alert>
+    <Dropdown :menu-options="options" @select="select">
+      1234
+    </Dropdown>
 </template>
 
 <script lang="ts" setup>
@@ -43,8 +46,10 @@ import Collapse from './components/Collapse/Collapse.vue';
 import CollapseItem from './components/Collapse/CollapseItem.vue';
 import Tooltip from './components/Tooltip/Tooltip.vue';
 import Icon from './components/Icon/Icon.vue';
-import { ref } from 'vue';
-import type { Options } from '@popperjs/core';
+import Dropdown from './components/Dropdown/Dropdown.vue';
+import { type MenuOption } from './components/Dropdown/types';
+import { h, ref } from 'vue';
+
 
 defineOptions({
   name:'APP'
@@ -56,7 +61,12 @@ let alert = ref();
 let openList = ref(['a']);
 let iconColor = ref<any>('green');
 let iconSize = ref<any>('xl');
-const options: Partial<Options> = { placement: 'top', strategy:'fixed' }
+const options:MenuOption[] =[
+  {key:1, label: h('b','blod') },
+  {key:2, label: 'item2', disabled: true},
+  {key:3, label: 'item3', divided: true},
+  {key:4, label: 'item4', }
+]
 function open() {
   console.log(btn);
   alert.value.open();
@@ -71,6 +81,10 @@ setTimeout(()=>{
   iconColor.value = 'gray'
   iconSize.value = '3x';
   },2000);
+const select = (e:MenuOption) => {
+  console.log(e);
+  
+}
 </script>
 
 <style>
