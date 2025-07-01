@@ -40,6 +40,7 @@
 </template>
 
 <script lang="ts" setup>
+import { createMessage } from './components/Message/method';
 import Alert from './components/Alert/Alert.vue';
 import Button from './components/Button/Button.vue';
 import Collapse from './components/Collapse/Collapse.vue';
@@ -85,6 +86,10 @@ const select = (e:MenuOption) => {
   console.log(e);
   
 }
+
+createMessage({message:'hello', duration:0, showClose:true})
+createMessage({message:'hello', duration:3000, showClose:true})
+createMessage({message:'hello', duration:0, showClose:true})
 </script>
 
 <style>
