@@ -1,4 +1,4 @@
-import type { VNode } from "vue";
+import type { ComponentInternalInstance, VNode } from "vue";
 export interface CreateMessageProps {
   message?: string | VNode;
   duration?: number;
@@ -22,5 +22,6 @@ export interface MessageContext {
   vnode: VNode;
   props: MessageProps;
   bottom?: number;
+  vm: ComponentInternalInstance
 }
 

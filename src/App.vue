@@ -81,6 +81,7 @@ function close2() {
 setTimeout(()=>{
   iconColor.value = 'gray'
   iconSize.value = '3x';
+  msg.destory();
   },2000);
 const select = (e:MenuOption) => {
   console.log(e);
@@ -88,7 +89,7 @@ const select = (e:MenuOption) => {
 }
 
 createMessage({message:'hello', duration:0, showClose:true})
-createMessage({message:'hello', duration:3000, showClose:true})
+const msg=createMessage({message:'hello', duration:0, showClose:true})
 createMessage({message:'hello', duration:0, showClose:true})
 </script>
 

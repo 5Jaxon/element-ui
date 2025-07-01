@@ -12,19 +12,31 @@ export const createMessage = (props: CreateMessageProps) => {
     instances.splice(idx, 1);
     render(null, container);
   }
+
+  const manualDestroy = () => {
+    const instance = instances.find(instance => instance.id === id);
+    if (instance) {
+      instance.vm.exposed!.visible.value = false;
+    }
+  }
+
   const props2 = {
     ...props,
     id,
     onDestory
   }
+
   const vNode = h(MessageConstructor, props2);
   render(vNode, container);
   document.body.appendChild(container.firstChild!);
+  let vm = vNode.component!;
   const instance = {
     id,
     vnode: vNode,
     props: props2,
-    bottom: 0
+    bottom: 0,
+    vm,
+    destory: manualDestroy
   };
   instances.push(instance);
   return instance;
