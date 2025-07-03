@@ -8,13 +8,13 @@ export default function useEventListtener(
   if (isRef(target)) {
     watch(target, (val, oldVal) => {
       oldVal?.removeEventListener(event, handler);
-      val.addEventListener(event, handler);
+      val?.addEventListener(event, handler);
     })
   } else {
     onMounted(() => {
       target.addEventListener(event, handler);
     })
-    
+
   }
   onBeforeMount(() => {
     unref(target)?.removeEventListener(event, handler);

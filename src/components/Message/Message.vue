@@ -40,8 +40,9 @@ const close = () => {
   visible.value = false;
 }
 
-function keyDown(e: KeyboardEvent) {  
-  if (e.code === 'Escape') {
+function keyDown(e: any) {  
+  const event = e as KeyboardEvent;
+  if (event.code === 'Escape') {
     visible.value = false;
   }
 }
