@@ -4,7 +4,7 @@
     'is-close': showClose,    
     }" v-show="visible"
     ref="container"
-  :style="{top:top+'px'}">
+  :style="{top:top+'px',zIndex:zIndex}">
     <div class="jx-message__content">
       <slot><RenderVnode :vNode="message" v-if="message"></RenderVnode></slot>
     </div>

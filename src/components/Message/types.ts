@@ -15,6 +15,7 @@ export interface MessageProps {
   offset?: number;
   id: string;
   onDestory: () => void;
+  zIndex: number;
 }
 
 export interface MessageContext {

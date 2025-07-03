@@ -1,9 +1,11 @@
-import { render, h, shallowReactive, reactive } from "vue"
+import { render, h, reactive } from "vue"
 import type { CreateMessageProps, MessageContext } from "./types"
 import MessageConstructor from './Message.vue'
+import useZIndex from "@/hooks/useZIndex";
 let seed = 1;
 const instances = reactive<MessageContext[]>([]);
 export const createMessage = (props: CreateMessageProps) => {
+  const { nextZIndex } = useZIndex();
   const id = `message_${seed++}`;
   const container = document.createElement('div');
   const onDestory = () => {
@@ -23,6 +25,7 @@ export const createMessage = (props: CreateMessageProps) => {
   const props2 = {
     ...props,
     id,
+    zIndex: nextZIndex(),
     onDestory
   }
 
