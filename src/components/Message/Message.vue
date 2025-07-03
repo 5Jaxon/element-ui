@@ -4,6 +4,8 @@
     'is-close': showClose,    
     }" v-show="visible"
     ref="container"
+    @mouseenter="clearTimer"
+    @mouseleave="setTimer"
   :style="{top:top+'px',zIndex:zIndex}">
     <div class="jx-message__content">
       <slot><RenderVnode :vNode="message" v-if="message"></RenderVnode></slot>
@@ -22,7 +24,9 @@ import type { MessageProps } from './types';
 import Icon from '@/components/Icon/Icon.vue';
 import { computed, nextTick, onMounted, ref, watch } from 'vue';
 import { getLastBottom, setBottom } from './method';
+import useEventListtener from '@/hooks/useEventListener';
 
+let timer: any;
 const props = withDefaults(defineProps<MessageProps>(), { type: 'info', duration: 3000, offset: 20 });
 const visible = ref(true);
 const container = ref();
@@ -36,11 +40,29 @@ const close = () => {
   visible.value = false;
 }
 
+function keyDown(e: KeyboardEvent) {  
+  if (e.code === 'Escape') {
+    visible.value = false;
+  }
+}
+
+useEventListtener(window, 'keydown', keyDown);
+
+function clearTimer() {
+  if (timer) {
+    clearTimeout(timer);
+    timer = null;
+  }
+}
+
+function setTimer() {
+  if (props.duration > 0) {
+    timer = setTimeout(() => visible.value = false, props.duration);
+  }  
+}
 
 onMounted(async() => {
-  if (props.duration > 0) {
-    setTimeout(() => visible.value = false, props.duration);
-  }  
+  setTimer();
   await nextTick();
   setBottom(props.id, top.value + container.value.clientHeight);
   

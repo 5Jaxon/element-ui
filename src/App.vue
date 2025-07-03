@@ -88,9 +88,9 @@ const select = (e:MenuOption) => {
   
 }
 
-createMessage({message:'hello', duration:0, showClose:true})
-const msg=createMessage({message:'hello', duration:0, showClose:true})
-createMessage({message:'hello', duration:0, showClose:true})
+createMessage({message:'hello', duration:0, showClose:true,type:'success'})
+const msg=createMessage({message:'hello', duration:0, showClose:true,type:'error'})
+createMessage({message:'hello', duration:2000, showClose:true,type:'warning'})
 </script>
 
 <style>

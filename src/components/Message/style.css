@@ -1,8 +1,77 @@
 .jx-message {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  --jx-message-bg-color: var(--jx-color-info-light-9);
+  --jx-message-border-color: var(--jx-border-color-lighter);
+  --jx-message-padding: 15px 19px;
+  --jx-message-close-size: 16px;
+  --jx-message-close-icon-color: var(--jx-text-color-placeholder);
+  --jx-message-close-hover-color: var(--jx-text-color-secondary);
+}
+.jx-message {
+  width: fit-content;
+  max-width: calc(100% - 32px);
+  box-sizing: border-box;
+  border-radius: var(--jx-border-radius-base);
+  border-width: var(--jx-border-width);
+  border-style: var(--jx-border-style);
+  border-color: var(--jx-message-border-color);
   position: fixed;
   left: 50%;
-  transform: translate(-50%, 0);
+  top: 20px;
+  transform: translateX(-50%);
+  background-color: var(--jx-message-bg-color);
+  padding: var(--jx-message-padding);
+  display: flex;
+  align-items: center;
+  transition: top var(--jx-transition-duration);
+  .jx-message__content {
+    color: var(--jx-message-text-color);
+    overflow-wrap: anywhere;
+  }
+  &.is-close .jx-message__content {
+    padding-right: 30px;
+  }
+  .jx-message__close {
+    display: flex;
+    align-items: center;
+  }
+  .jx-message__close svg {
+    cursor: pointer;
+  }
+  .jx-message__icon {
+    position: relative;
+    top: 2px;
+    right: 10px;
+  }
+}
+.jx-message--success {
+--jx-message-bg-color: var(--jx-color-success-light-9);
+--jx-message-border-color: var(--jx-color-success-light-8);
+--jx-message-text-color: var(--jx-color-success);
+.jx-message__close {
+  --jx-icon-color: var(--jx-color-success);
+}
+}
+.jx-message--info {
+--jx-message-bg-color: var(--jx-color-info-light-9);
+--jx-message-border-color: var(--jx-color-info-light-8);
+--jx-message-text-color: var(--jx-color-info);
+.jx-message__close {
+  --jx-icon-color: var(--jx-color-info);
+}
+}
+.jx-message--warning {
+--jx-message-bg-color: var(--jx-color-warning-light-9);
+--jx-message-border-color: var(--jx-color-warning-light-8);
+--jx-message-text-color: var(--jx-color-warning);
+.jx-message__close {
+  --jx-icon-color: var(--jx-color-warning);
+}
+}
+.jx-message--danger {
+--jx-message-bg-color: var(--jx-color-danger-light-9);
+--jx-message-border-color: var(--jx-color-danger-light-8);
+--jx-message-text-color: var(--jx-color-danger);
+.jx-message__close {
+  --jx-icon-color: var(--jx-color-danger);
+}
 }
