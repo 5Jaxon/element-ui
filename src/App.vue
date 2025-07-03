@@ -37,6 +37,8 @@
     <Dropdown :menu-options="options" @select="select">
       1234
     </Dropdown>
+    <Input v-model="text"></Input>
+    {{ text }}
 </template>
 
 <script lang="ts" setup>
@@ -50,7 +52,7 @@ import Icon from './components/Icon/Icon.vue';
 import Dropdown from './components/Dropdown/Dropdown.vue';
 import { type MenuOption } from './components/Dropdown/types';
 import { h, ref } from 'vue';
-
+import Input from './components/Input/Input.vue';
 
 defineOptions({
   name:'APP'
@@ -62,6 +64,7 @@ let alert = ref();
 let openList = ref(['a']);
 let iconColor = ref<any>('green');
 let iconSize = ref<any>('xl');
+let text = ref('')
 const options:MenuOption[] =[
   {key:1, label: h('b','blod') },
   {key:2, label: 'item2', disabled: true},
