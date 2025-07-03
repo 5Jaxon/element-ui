@@ -37,7 +37,7 @@
     <Dropdown :menu-options="options" @select="select">
       1234
     </Dropdown>
-    <Input v-model="text"></Input>
+    <Input v-model="text" :showPassword="true" clearable></Input>
     {{ text }}
 </template>
 
