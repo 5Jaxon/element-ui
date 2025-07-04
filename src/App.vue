@@ -37,8 +37,12 @@
     <Dropdown :menu-options="options" @select="select">
       1234
     </Dropdown>
-    <Input v-model="text" :showPassword="true" clearable></Input>
+    <Input v-model="text" :showPassword="true" clearable placeholder="3" style="width: 50%"></Input>
+    <Input v-model="text" size="large" style="width: 50%" ></Input>
+    <Input v-model="text" type="textarea" style="width: 50%" disabled></Input>
     {{ text }}
+    <Switch v-model="check" size="large" active-text="on" inactive-text="off" active-value="1" inactive-value="0"></Switch>
+    {{ check }}
 </template>
 
 <script lang="ts" setup>
@@ -53,6 +57,7 @@ import Dropdown from './components/Dropdown/Dropdown.vue';
 import { type MenuOption } from './components/Dropdown/types';
 import { h, ref } from 'vue';
 import Input from './components/Input/Input.vue';
+import Switch from './components/Switch/Switch.vue';
 
 defineOptions({
   name:'APP'
@@ -65,6 +70,7 @@ let openList = ref(['a']);
 let iconColor = ref<any>('green');
 let iconSize = ref<any>('xl');
 let text = ref('')
+let check = ref(0);
 const options:MenuOption[] =[
   {key:1, label: h('b','blod') },
   {key:2, label: 'item2', disabled: true},

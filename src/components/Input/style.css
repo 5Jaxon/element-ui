@@ -1,0 +1,255 @@
+.jx-input {
+  --jx-input-text-color: var(--jx-text-color-regular);
+  --jx-input-border: var(--jx-border);
+  --jx-input-hover-border: var(--jx-border-color-hover);
+  --jx-input-focus-border: var(--jx-color-primary);
+  --jx-input-transparent-border: 0 0 0 1px transparent inset;
+  --jx-input-border-color: var(--jx-border-color);
+  --jx-input-border-radius: var(--jx-border-radius-base);
+  --jx-input-bg-color: var(--jx-fill-color-blank);
+  --jx-input-icon-color: var(--jx-text-color-placeholder);
+  --jx-input-placeholder-color: var(--jx-text-color-placeholder);
+  --jx-input-hover-border-color: var(--jx-border-color-hover);
+  --jx-input-clear-hover-color: var(--jx-text-color-secondary);
+  --jx-input-focus-border-color: var(--jx-color-primary);
+}
+
+.jx-input {
+  --jx-input-height: var(--jx-component-size);
+  position: relative;
+  font-size: var(--jx-font-size-base);
+  display: inline-flex;
+  width: 100%;
+  line-height: var(--jx-input-height);
+  box-sizing: border-box;
+  vertical-align: middle;
+
+  &.is-disabled {
+    cursor: not-allowed;
+
+    .jx-input__wrapper {
+      background-color: var(--jx-disabled-bg-color);
+      box-shadow: 0 0 0 1px var(--jx-disabled-border-color) inset;
+    }
+
+    .jx-input__inner {
+      color: var(--jx-disabled-text-color);
+      -webkit-text-fill-color: var(--jx-disabled-text-color);
+      cursor: not-allowed;
+    }
+
+    .jx-textarea__inner {
+      background-color: var(--jx-disabled-bg-color);
+      box-shadow: 0 0 0 1px var(--jx-disabled-border-color) inset;
+      color: var(--jx-disabled-text-color);
+      -webkit-text-fill-color: var(--jx-disabled-text-color);
+      cursor: not-allowed;
+    }
+  }
+
+  &.is-prepend {
+    >.jx-input__wrapper {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+
+  &.is-append {
+    >.jx-input__wrapper {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+}
+
+.jx-input--large {
+  --jx-input-height: var(--jx-component-size-large);
+  font-size: 14px;
+
+  .jx-input__wrapper {
+    padding: 1px 15px;
+
+    .jx-input__inner {
+      --jx-input-inner-height: calc(var(--jx-input-height, 40px) - 2px);
+    }
+  }
+
+}
+
+.jx-input--small {
+  --jx-input-height: var(--jx-component-size-small);
+  font-size: 12px;
+
+  .jx-input__wrapper {
+    padding: 1px 7px;
+
+    .jx-input__inner {
+      --jx-input-inner-height: calc(var(--jx-input-height, 24px) - 2px);
+    }
+  }
+}
+
+.jx-input__prefix,
+.jx-input__suffix {
+  display: inline-flex;
+  white-space: nowrap;
+  flex-shrink: 0;
+  flex-wrap: nowrap;
+  height: 100%;
+  text-align: center;
+  color: var(--jx-input-icon-color, var(--jx-text-color-placeholder));
+  transition: all var(--jx-transition-duration);
+}
+
+.jx-input__prefix {
+  >:first-child {
+    margin-left: 0px !important;
+  }
+
+  >:last-child {
+    margin-right: 8px !important;
+  }
+}
+
+.jx-input__suffix {
+  >:first-child {
+    margin-left: 8px !important;
+  }
+
+  >:last-child {
+    margin-right: 0px !important;
+  }
+}
+
+.jx-input__prepend,
+.jx-input__append {
+  background-color: var(--jx-fill-color-light);
+  color: var(--jx-color-info);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  border-radius: var(--jx-input-border-radius);
+  padding: 0 20px;
+  white-space: nowrap;
+}
+
+.jx-input__prepend {
+  border-right: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  box-shadow: 1px 0 0 0 var(--jx-input-border-color) inset, 0 1px 0 0 var(--jx-input-border-color) inset, 0 -1px 0 0 var(--jx-input-border-color) inset;
+
+}
+
+.jx-input__append {
+  border-left: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  box-shadow: 0 1px 0 0 var(--jx-input-border-color) inset, 0 -1px 0 0 var(--jx-input-border-color) inset, -1px 0 0 0 var(--jx-input-border-color) inset;
+
+  &>.jx-input__wrapper {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}
+
+.jx-input--textarea {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  vertical-align: bottom;
+  font-size: var(--jx-font-size-base);
+}
+
+.jx-textarea__wrapper {
+  position: relative;
+  display: block;
+  resize: vertical;
+  padding: 5px 11px;
+  line-height: 1.5;
+  box-sizing: border-box;
+  width: 100%;
+  font-size: inherit;
+  font-family: inherit;
+  color: var(--jx-input-text-color, var(--jx-text-color-regular));
+  background-color: var(--jx-input-bg-color, var(--jx-fill-color-blank));
+  background-image: none;
+  -webkit-appearance: none;
+  box-shadow: 0 0 0 1px var(--jx-input-border-color, var(--jx-border-color)) inset;
+  border-radius: var(--jx-input-border-radius, var(--jx-border-radius-base));
+  transition: var(--jx-transition-box-shadow);
+  border: none;
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 1px var(--jx-input-focus-border-color) inset;
+  }
+
+  &::placeholder {
+    color: var(--jx-input-placeholder-color);
+  }
+}
+
+.jx-input__wrapper {
+  display: inline-flex;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 1px 11px;
+  background-color: var(--jx-input-bg-color, var(--jx-fill-color-blank));
+  background-image: none;
+  border-radius: var(--jx-input-border-radius, var(--jx-border-radius-base));
+  transition: var(--jx-transition-box-shadow);
+  box-shadow: 0 0 0 1px var(--jx-input-border-color, var(--jx-border-color)) inset;
+
+  &:hover {
+    box-shadow: 0 0 0 1px var(--jx-input-hover-border-color) inset;
+  }
+
+  &.is-focus {
+    box-shadow: 0 0 0 1px var(--jx-input-focus-border-color) inset;
+  }
+
+  .jx-input__inner {
+    --jx-input-inner-height: calc(var(--jx-input-height, 32px) - 2px);
+    width: 100%;
+    flex-grow: 1;
+    -webkit-appearance: none;
+    color: var(--jx-input-text-color, var(--jx-text-color-regular));
+    font-size: inherit;
+    height: var(--jx-input-inner-height);
+    line-height: var(--jx-input-inner-height);
+    padding: 0;
+    outline: none;
+    border: none;
+    background: none;
+    box-sizing: border-box;
+
+    &::placeholder {
+      color: var(--jx-input-placeholder-color);
+    }
+  }
+
+  .jx-icon {
+    height: inherit;
+    line-height: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all var(--jx-transition-duration);
+    margin-left: 8px;
+  }
+
+  .jx-input__clear,
+  .jx-input__password {
+    color: var(--jx-input-icon-color);
+    font-size: 14px;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--jx-input-clear-hover-color);
+    }
+  }
+}
