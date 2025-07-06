@@ -43,6 +43,7 @@
     {{ text }}
     <Switch v-model="check" size="large" active-text="on" inactive-text="off" active-value="1" inactive-value="0"></Switch>
     {{ check }}
+    <Select :options="soptions" />
 </template>
 
 <script lang="ts" setup>
@@ -58,6 +59,7 @@ import { type MenuOption } from './components/Dropdown/types';
 import { h, ref } from 'vue';
 import Input from './components/Input/Input.vue';
 import Switch from './components/Switch/Switch.vue';
+import Select from './components/Select/Select.vue';
 
 defineOptions({
   name:'APP'
@@ -76,6 +78,12 @@ const options:MenuOption[] =[
   {key:2, label: 'item2', disabled: true},
   {key:3, label: 'item3', divided: true},
   {key:4, label: 'item4', }
+]
+
+const soptions = [
+  {label: 'item1', value: '1'}, 
+  {label: 'item2', value: '2', disabled: true},
+  {label: 'item3', value: '3', divided: true},
 ]
 function open() {
   console.log(btn);
