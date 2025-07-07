@@ -43,7 +43,8 @@
     {{ text }}
     <Switch v-model="check" size="large" active-text="on" inactive-text="off" active-value="1" inactive-value="0"></Switch>
     {{ check }}
-    <Select :options="soptions" />
+    <Select :options="soptions" v-model="sel" clearable filterable />
+    <span>{{ sel }}</span>
 </template>
 
 <script lang="ts" setup>
@@ -73,6 +74,7 @@ let iconColor = ref<any>('green');
 let iconSize = ref<any>('xl');
 let text = ref('')
 let check = ref(0);
+let sel = ref('1');
 const options:MenuOption[] =[
   {key:1, label: h('b','blod') },
   {key:2, label: 'item2', disabled: true},

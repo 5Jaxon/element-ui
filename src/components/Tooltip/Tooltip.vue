@@ -112,7 +112,9 @@ useClickOutside(containerNode, () => {
     close();
     
   }
-    
+  if (active.value) {
+    emit('click-outside', true);
+  }
 });
 
 watch(() => props.trigger, attachevents);
