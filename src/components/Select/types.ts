@@ -5,21 +5,26 @@ export interface SelectOption {
 }
 
 export type CustomFilterFn = (value: string) => SelectOption[];
+export type CustomFilterRemoteFn = (value: string) => Promise<SelectOption[]>;
 
 export interface SelectProps {
   modelValue?: string;
-  options: SelectOption[];
+  options?: SelectOption[];
   placeholder?: string;
   disabled?: boolean;
   clearable?: boolean;
   filterable?: boolean;
   filterMethod?: CustomFilterFn;
+  remote?: boolean;
+  remoteMethod?: CustomFilterRemoteFn;
 }
 
 export interface SelectState {
   label: string;
   value: string;
+  loading?: boolean;
   selected: SelectOption | null;
+  highlightedIndex: number;
 }
 
 export interface SelectEmits {

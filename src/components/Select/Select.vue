@@ -4,19 +4,27 @@
   @click="handleClick">
   <Tooltip manual ref="tooltipRef" :popperOption="popperOptions" @click-outside="dropdownShow(false)">
     <Input v-model="state.label" :disable="disabled"
-    :placeholder="filteredPlaceholder" :readonly="!filterable" ref="inputRef"
-    @mouseenter="hover = true" @input="onFilter"
-    @mouseleave="hover = false">
+    :placeholder="filteredPlaceholder" :readonly="!filterable && !remote" ref="inputRef"
+    @mouseenter="hover = true" @input="onInput"
+    @mouseleave="hover = false" @keydown.stop="handleKeydown">
       <template #suffix>
         <Icon v-if="clearable && state.value && hover" icon="close"  @click.stop="clear"/>
         <Icon v-else icon="angle-down" class="header-angle" :class="{ 'is-active': visible}"/>
       </template>
     </Input>
     <template #content>
+      <div class="jx-select__loading" v-if="state.loading">
+        <Icon icon="spinner" spin></Icon>
+      </div>
+      <div class="jx-select__nodata" v-else-if="(filterable || remote) && filteredOptions.length === 0">无匹配项</div>
       <ul class="jx-select__menu" >
         <template v-for="(item, index) in filteredOptions" :key="index">
           <li class="jx-select__menu-item"
-            :class="{'is-disabled': item.disabled, 'is-selected': item.value === state.value}"
+            :class="{
+              'is-disabled': item.disabled, 
+              'is-highlighted': state.highlightedIndex === index,
+              'is-selected': item.value === state.value
+            }"
             :id="`select-item-${index}`"
             @click.stop="selectItem(item)">
             {{ item.label }}
@@ -34,7 +42,7 @@ import Input from '../Input/Input.vue';
 import Icon from '../Icon/Icon.vue';
 import type { SelectEmits, SelectOption, SelectProps, SelectState } from './types';
 import { computed, reactive, ref, watch } from 'vue';
-import { isFunction } from 'lodash-es';
+import { drop, isFunction } from 'lodash-es';
 
 defineOptions({
   name: 'JxSelect',
@@ -45,12 +53,14 @@ const tooltipRef = ref<InstanceType<typeof Tooltip> | null>(null);
 const inputRef = ref<InstanceType<typeof Input> | null>(null);
 const visible = ref(false);
 const hover = ref(false);
-const props = defineProps<SelectProps>();
+let timeout: any = null;
+const props = withDefaults(defineProps<SelectProps>(), { options: () => [] });
 const emit = defineEmits<SelectEmits>();
 const state = reactive<SelectState>({
   label: findLabelByValue(props.modelValue || ''),
   value: props.modelValue || '',
   selected: props.options.find(option => option.value === (props.modelValue || '')) || null,
+  highlightedIndex: -1,
 });
 
 const popperOptions: any = {
@@ -79,18 +89,36 @@ watch(() => props.options, (newOptions) => {
   filteredOptions.value = newOptions;  
 });
 
-const generateFilteredOptions = (searchValue: string) => {
-  if (!props.filterable) return;
+const generateFilteredOptions = async (searchValue: string) => {
+  if (!props.filterable && !props.remote) return;
   if (props.filterMethod && isFunction(props.filterMethod)) {
     filteredOptions.value = props.filterMethod(searchValue);
+  } else if (props.remote && isFunction(props.remoteMethod)) {
+    state.loading = true;
+    try {
+      filteredOptions.value = await props.remoteMethod(searchValue);
+    } catch (e) {
+      console.error('Error in remote method:', e);
+      filteredOptions.value = [];
+    } finally {
+      state.loading = false;
+    }
   } else {
     const lowerCaseSearch = searchValue.toLowerCase();
     filteredOptions.value = props.options.filter(option => 
       option.label.toLowerCase().includes(lowerCaseSearch)
     );
   } 
-
 };
+
+function onInput(value: string) {
+  if (timeout) {
+    clearTimeout(timeout);
+  }
+  timeout = setTimeout(() => {
+    onFilter(value);
+  }, 300);
+}
 
 function onFilter(value: string) {
   if (value === '') {
@@ -122,9 +150,10 @@ function dropdownShow(show: boolean) {
     if (props.filterable) onFilter(state.label);
     tooltipRef.value?.show();
   } else {
+    state.highlightedIndex = -1;
     tooltipRef.value?.hide();
-    if (props.filterable) {
-      state.label = state.selected ? state.selected.label : '';
+    if (props.filterable || props.remote) {
+      state.label = state.selected !== null ? state.selected.label : '';
     }
   }
   visible.value = show;
@@ -137,12 +166,53 @@ function findLabelByValue(value: string): string {
 }
 
 watch(() => props.modelValue, (newValue: string | undefined) => {
-  if (newValue === undefined) {
+  if (newValue === undefined || newValue === state.value) {
     return
   }
   state.value = newValue;
   state.label = findLabelByValue(newValue);
 });
+
+const handleKeydown = (e: KeyboardEvent) => {
+  switch (e.key) {
+    case 'ArrowDown':
+      e.preventDefault();
+      if (filteredOptions.value.length > 0) {
+        if (state.highlightedIndex < filteredOptions.value.length - 1) {
+          state.highlightedIndex++;
+        } else {
+          state.highlightedIndex = 0;
+        }
+      }
+      break;
+    case 'ArrowUp':
+      e.preventDefault();
+      if (filteredOptions.value.length > 0) {
+        if (state.highlightedIndex > 0) {
+          state.highlightedIndex--;
+        } else {
+          state.highlightedIndex = filteredOptions.value.length - 1;
+        }
+      }
+      break;
+    case 'Enter':
+    e.preventDefault();
+      if (!visible.value) {        
+        dropdownShow(true);
+      } else if (filteredOptions.value[state.highlightedIndex]) {        
+        selectItem(filteredOptions.value[state.highlightedIndex]);
+        dropdownShow(false);
+      }
+      
+      break;
+    case 'Escape':
+      e.preventDefault();
+      dropdownShow(false);
+      break;
+    default:
+      break;
+  }
+};
 
 function selectItem(item: SelectOption) {
   if (item.disabled) return;

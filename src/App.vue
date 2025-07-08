@@ -44,6 +44,7 @@
     <Switch v-model="check" size="large" active-text="on" inactive-text="off" active-value="1" inactive-value="0"></Switch>
     {{ check }}
     <Select :options="soptions" v-model="sel" clearable filterable />
+    <Select  v-model="sel"  remote :remote-method="handleFetch"/>
     <span>{{ sel }}</span>
 </template>
 
@@ -110,6 +111,25 @@ const select = (e:MenuOption) => {
 createMessage({message:'hello', duration:0, showClose:true,type:'success'})
 const msg=createMessage({message:'hello', duration:0, showClose:true,type:'error'})
 createMessage({message:'hello', duration:2000, showClose:true,type:'warning'})
+
+function handleFetch(query: string) {
+  if (!query) {
+    return Promise.resolve([]);
+  }else {
+    return fetch(`https://api.github.com/search/repositories?q=${query}`)
+      .then(response => response.json())
+      .then(data => {
+        const items = data.items.slice(0, 10); // Limit to 10 results
+        return items.map((item: any) => ({
+          label: item.name,
+          value: String(item.id)
+        }));
+      })
+      .catch(() => {
+        return [];
+      });
+  }
+}
 </script>
 
 <style>
