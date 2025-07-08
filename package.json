@@ -18,6 +18,7 @@
     "@fortawesome/vue-fontawesome": "^3.0.8",
     "@popperjs/core": "^2.11.8",
     "@types/lodash-es": "^4.17.12",
+    "async-validator": "^4.2.5",
     "lodash-es": "^4.17.21",
     "vue": "^3.5.17"
   },

@@ -50,7 +50,7 @@ defineOptions({
   // inheritAttrs: false
 })
 const props = withDefaults(defineProps<InputProps>(), { type: 'text', autocomplete: 'off' });
-const innerValue = ref(props.modelValue);
+const innerValue = ref(props.modelValue || '');
 const isFocus = ref(false);
 const passwordVisible = ref(false);
 const inputRef = ref<HTMLInputElement | null>(null);
@@ -75,9 +75,14 @@ const showPasswordArea = computed(() => {
   !props.disabled && 
   !!innerValue.value;
 })  
+
 watch(() => props.modelValue, (v) => {
+  if (v === undefined || v === null) {
+    v = '';
+  }
   innerValue.value = v;
 })
+
 const handleInput = () => {  
   emits('update:modelValue', innerValue.value);
   emits('input', innerValue.value);

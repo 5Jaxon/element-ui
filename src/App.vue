@@ -46,6 +46,7 @@
     <Select :options="soptions" v-model="sel" clearable filterable />
     <Select  v-model="sel"  remote :remote-method="handleFetch"/>
     <span>{{ sel }}</span>
+    <Basic/>
 </template>
 
 <script lang="ts" setup>
@@ -62,7 +63,7 @@ import { h, ref } from 'vue';
 import Input from './components/Input/Input.vue';
 import Switch from './components/Switch/Switch.vue';
 import Select from './components/Select/Select.vue';
-
+import Basic from './components/Form/Basic.vue';
 defineOptions({
   name:'APP'
 });
