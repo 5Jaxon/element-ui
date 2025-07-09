@@ -41,9 +41,10 @@
 </template>
 
 <script setup lang="ts"> 
-import { computed, nextTick, ref, watch } from 'vue';
+import { computed, inject, nextTick, ref, watch } from 'vue';
 import type { InputEmits, InputProps } from './types';
 import Icon from '../Icon/Icon.vue';
+import { formItemContextKey } from '../Form/types';
 
 defineOptions({
   name: 'JxInput',
@@ -54,6 +55,13 @@ const innerValue = ref(props.modelValue || '');
 const isFocus = ref(false);
 const passwordVisible = ref(false);
 const inputRef = ref<HTMLInputElement | null>(null);
+const formItemContext = inject(formItemContextKey);
+
+const runValidation = (type: string) => {
+  if (formItemContext && formItemContext.validate) {
+    formItemContext.validate(type);
+  }
+};
 
 async function keepFocus() {
   await nextTick();
@@ -84,6 +92,7 @@ watch(() => props.modelValue, (v) => {
 })
 
 const handleInput = () => {  
+  runValidation('input');
   emits('update:modelValue', innerValue.value);
   emits('input', innerValue.value);
 }
@@ -91,11 +100,13 @@ const handleInput = () => {
 const handleFocus = () => {  
   isFocus.value = true;
   emits('focus', new FocusEvent('focus'));
+  runValidation('focus');
 }
 
 const handleBlur = () => {
   isFocus.value = false;
   emits('blur', new FocusEvent('blur'));
+  runValidation('blur');
 }
 const emits = defineEmits<InputEmits>();
 
@@ -108,6 +119,7 @@ const handleClear = () => {
 };
 
 const handleChange = () => {
+  runValidation('change');
   emits('change', innerValue.value);
 }
 

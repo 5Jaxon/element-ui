@@ -4,25 +4,27 @@
     'is-error': validateStatus.state === 'error',
     'is-success': validateStatus.state === 'success',
     'is-loading': validateStatus.loading,
+    'is-required': isRequired,
   }">
-    <slot name="label">
-      <label v-if="label" class="jx-form-item__label">{{ label }}</label>
-    </slot>
-    <slot></slot>
-    <div v-if="validateStatus.state === 'error'" class="jx-form-item__error-msg">
-      {{ validateStatus.errorMessage }}
-    </div>
-    {{ innerValue }}-{{ itemRules }}
-    <span @click="validate">validate</span>
+    <div class="jx-form-item__label">
+      <slot name="label">
+        <label v-if="label" >{{ label }}</label>
+      </slot>
+    </div>    
+    <div class="jx-form-item__content">
+      <slot :validate="validateCatch"></slot>
+      <div v-if="validateStatus.state === 'error'" class="jx-form-item__error-msg">
+        {{ validateStatus.errorMessage }}
+      </div>
+    </div>    
   </div>
 
 </template>
 
 <script lang="ts" setup>
-import { computed, inject, reactive } from 'vue';
-import type { FormItemProps, FormValidateFailure } from './types';
-import { formItemContextKey } from './types';
-import type { RuleItem } from 'async-validator';
+import { computed, inject, onMounted, provide, reactive } from 'vue';
+import type { FormItemProps, FormValidateFailure, FormItemContext } from './types';
+import { formItemContextKey, formContextKey } from './types';
 import Schema from 'async-validator';
 defineOptions({
   name: 'JxFormItem'
@@ -34,7 +36,7 @@ const validateStatus = reactive({
   errorMessage: ''
 });
 const props = defineProps<FormItemProps>();
-const formContext = inject(formItemContextKey);
+const formContext = inject(formContextKey);
 const innerValue = computed(() => {
   const model = formContext?.model;
   if (model && props.prop && model.hasOwnProperty(props.prop)) {
@@ -49,25 +51,71 @@ const itemRules = computed(() => {
   } else return [];
 });
 
-const validate = () => {
+const isRequired = computed(() => {
+  const rules = itemRules.value;
+  return rules.some(rule => rule.required);
+});
+
+const validate = (type: string = '') => {
   const modelName = props.prop;
+  let rules;
+  
+  if (type === '') {
+    rules = itemRules.value;
+  } else {
+    rules = itemRules.value.filter(rule => {
+      if (!rule.trigger || rule.trigger === '') return true;
+      return rule.trigger === type;
+    });
+  }
+
+  if (rules.length === 0) {   
+    return true;
+  }
+
   if (modelName) {
     const validator = new Schema({
-      [modelName]: itemRules.value
+      [modelName]: rules
     });
     validateStatus.loading = true;
-    validator.validate({ [modelName]: innerValue.value})
+    return validator.validate({ [modelName]: innerValue.value})
     .then(() => {
-      console.log('Validation passed');
       validateStatus.state = 'success';
-    }).catch((e: FormValidateFailure) => {
-      const { errors, fields } = e;
-      console.log('Validation failed:', errors, fields);
+    }).catch((e: any) => {
+      const { errors } = e;      
       validateStatus.state = 'error';
       validateStatus.errorMessage = (errors && errors.length > 0) ? errors[0].message || '' : '';
+      return Promise.reject(e);
     }).finally(() => {
       validateStatus.loading = false;
     });
   }
 }
+
+const validateCatch = async (type: string = '') => {
+  try {
+      await validate(type);
+    } catch (e: any) {
+    }   
+}
+
+const resetValidate = () => {
+  validateStatus.state = 'init';
+  validateStatus.loading = false;
+  validateStatus.errorMessage = '';
+}
+
+onMounted(() => {
+  if (formContext && formContext.addValidate) {
+    formContext.addValidate(validate);
+  }
+  if (formContext && formContext.addReset) {
+    formContext.addReset(resetValidate);
+  }
+});
+
+const context: FormItemContext = {  
+  validate:validateCatch,
+};  
+provide(formItemContextKey, context);
 </script>

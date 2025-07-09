@@ -1,0 +1,56 @@
+.jx-form {
+  --jx-form-label-font-size: var(--jx-font-size-base);
+  --jx-form-content-font-size: var(--jx-font-size-base);
+}
+
+.jx-form-item {
+  display: flex;
+  margin-bottom: 18px;
+
+  .jx-form-item__label {
+    width: 150px;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 12px 0 0;
+    box-sizing: border-box;
+    display: inline-flex;
+    justify-content: flex-end;
+    font-size: var(--jx-form-label-font-size);
+    color: var(--jx-text-color-regular);
+  }
+
+  .jx-form-item__content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    flex: 1;
+    line-height: 32px;
+    font-size: var(--jx-form-content-font-size);
+    min-width: 0;
+    position: relative;
+  }
+
+  .jx-form-item__error-msg {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding-top: 2px;
+    color: var(--jx-color-danger);
+    font-size: 12px;
+    line-height: 1;
+  }
+}
+
+.jx-form-item.is-error .jx-input__wrapper {
+  box-shadow: 0 0 0 1px var(--jx-color-danger) inset;
+}
+
+.jx-form-item.is-success .jx-input__wrapper {
+  box-shadow: 0 0 0 1px var(--jx-color-success) inset;
+}
+
+.jx-form-item.is-required>.jx-form-item__label::before {
+  content: "*";
+  color: var(--jx-color-danger);
+  margin-right: 4px;
+}

@@ -5,15 +5,25 @@ export interface FormItemProps {
   prop?: string;
 }
 
-export type FormRules = Record<string, RuleItem[]>;
+export interface FormRule extends RuleItem {
+  trigger?: string;
+}
+
+export type FormRules = Record<string, FormRule[]>;
 
 export interface FormProps {
   model?: Record<string, any>;
   rules?: FormRules;
 }
 
-export interface FormItemContext extends FormProps {
 
+export interface FormContext extends FormProps {
+  addValidate: (fn: FormItemContext['validate']) => void;
+  addReset: (fn: Function) => void;
+}
+
+export interface FormItemContext {
+  validate: (type: string) => any;
 }
 
 export interface FormValidateFailure {
@@ -21,4 +31,5 @@ export interface FormValidateFailure {
   fields: ValidateFieldsError;
 }
 
-export const formItemContextKey: InjectionKey<FormItemContext> = Symbol();
+export const formItemContextKey: InjectionKey<FormItemContext> = Symbol('formItemContextKey');
+export const formContextKey: InjectionKey<FormContext> = Symbol();

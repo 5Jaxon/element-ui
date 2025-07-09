@@ -6,12 +6,41 @@
 </template>
 
 <script lang="ts" setup>
-import type { FormProps } from './types.ts';
-import { formItemContextKey } from './types.ts';
+import type { FormItemContext, FormProps } from './types.ts';
+import { formContextKey } from './types.ts';
 import { provide } from 'vue';
 const props = defineProps<FormProps>();
 defineOptions({
   name: 'JxForm'
 });
-provide(formItemContextKey, props)
+
+const validateList: FormItemContext['validate'][] = [];
+const resetList: Function[] = [];
+function addValidate(fn: FormItemContext['validate']) {
+  validateList.push(fn);
+}
+function addReset(fn: Function) {
+  resetList.push(fn);
+}
+
+async function validateAll() {
+  let res;
+  await Promise.all(validateList.map(fn => fn(''))).then(() => { res = true }, e => { res = e });
+  return res;
+}
+
+function resetAll() {
+  resetList.forEach(fn => fn());
+}
+
+provide(formContextKey, {
+  ...props,
+  addValidate,
+  addReset,
+})
+
+defineExpose({
+  validateAll,
+  resetAll
+});
 </script>
